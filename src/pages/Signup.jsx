@@ -1,13 +1,28 @@
-import React from "react";
+// src/components/Signup.js
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { register } from "../api/SignUp"; // Import the register function
 
 function Signup({ theme }) {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
 	const navigate = useNavigate();
 
-	const handleLogin = (e) => {
+	const handleSignup = async (e) => {
 		e.preventDefault();
-		navigate("/login");
+		try {
+			const data = await register(name, email, password);
+			// Handle the response data (e.g., show a success message, navigate)
+			//give notification successfully regiters
+			alert("Successfully registered");
+			navigate("/login");
+		} catch (error) {
+			alert(error.message);
+		}
 	};
+
 	return (
 		<div
 			className={`min-h-screen ${
@@ -29,10 +44,10 @@ function Signup({ theme }) {
 						<span className='dark:text-white'>Account</span>{" "}
 						<span className='dark:text-[#F14A16]'>SignUp</span>
 					</h2>
-					<form onSubmit={handleLogin}>
+					<form onSubmit={handleSignup}>
 						<div className='mb-4'>
 							<label
-								htmlFor='email'
+								htmlFor='name'
 								className='block text-zinc-700 dark:text-[#A4A4A4]'>
 								Name
 							</label>
@@ -41,6 +56,8 @@ function Signup({ theme }) {
 								id='name'
 								name='name'
 								required
+								value={name}
+								onChange={(e) => setName(e.target.value)}
 								className='w-full px-3 py-2 border border-zinc-300 focus:border-orange-400 rounded-md dark:bg-[#292626]'
 							/>
 						</div>
@@ -55,6 +72,8 @@ function Signup({ theme }) {
 								id='email'
 								name='email'
 								required
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 								className='w-full px-3 py-2 border border-zinc-300 group-focus:border-orange-500 rounded-md dark:bg-[#292626]'
 							/>
 						</div>
@@ -69,6 +88,8 @@ function Signup({ theme }) {
 								id='password'
 								name='password'
 								required
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 								className='w-full px-3 py-2 border border-zinc-300 rounded-md dark:bg-[#292626]'
 							/>
 						</div>
@@ -85,7 +106,7 @@ function Signup({ theme }) {
 							<span className='border-t-2 w-full border-gray-500'></span>
 						</p>
 						<button
-							type='submit'
+							type='button'
 							className={`w-full flex flex-row border border-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg justify-evenly`}>
 							<img src='images/google.png' alt='' className='w-6' />
 							<span className='font-medium'>Sign up with Google</span>
