@@ -20,7 +20,6 @@ function Login({ theme }) {
 			alert(error.message);
 		}
 	};
-
 	return (
 		<div
 			className={`min-h-screen ${

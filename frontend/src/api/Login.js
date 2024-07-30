@@ -15,7 +15,6 @@ export const login = async (email, password) => {
 		if (!response.ok) {
 			throw new Error("Login failed, please check your credentials.");
 		}
-
 		const data = await response.json();
 		return data;
 	} catch (error) {
