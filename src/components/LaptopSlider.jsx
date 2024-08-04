@@ -10,7 +10,7 @@ const LaptopSlider = () => {
     slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     cssEase: "linear",
   };
 
@@ -21,29 +21,29 @@ const LaptopSlider = () => {
         alt="Laptop Slider"
         className="w-full rounded-lg"
       />
-      <div className="slider-container absolute top-7 w-[460px] left-[4.9rem]">
+      <div className="slider-container absolute  md:top-7  xl:top-7 lg:top-6 md:w-[28.5rem] lg:w-[22rem]  xl:w-[28.5rem] md:left-[4.9rem] xl:left-[4.9rem] lg:left-[3.9rem]">
         <Slider {...settings}>
-        <div className="">
-          <img
-            src="../../public/images/slider-CE.png"
-            alt=""
-            className="w-[460px] h-[285px]"
-          />
-        </div>
-        <div className="">
-          <img
-            src="../../public/images/slider-VE.png"
-            alt=""
-            className="w-[460px] h-[285px]"
-          />
-        </div>
-        <div className="">
-          <img
-            src="../../public/images/slider-pf.png"
-            alt=""
-            className="w-[460px] h-[285px]"
-          />
-        </div>
+          <div className="">
+            <img
+              src="../../public/images/slider-CE.png"
+              alt=""
+              className="sm:w-[28.5rem] md:w-[28.5rem] lg:w-[22rem] xl:w-[28.5rem] md:h-[17.8125rem] xl:h-[17.8125rem] lg:h-[14rem] "
+            />
+          </div>
+          <div className="">
+            <img
+              src="../../public/images/slider-VE.png"
+              alt=""
+              className="md:w-[28.5rem] lg:w-[22rem] xl:w-[28.5rem] md:h-[17.8125rem] xl:h-[17.8125rem] lg:h-[14rem] "
+            />
+          </div>
+          <div className="">
+            <img
+              src="../../public/images/slider-pf.png"
+              alt=""
+              className="md:w-[28.5rem] lg:w-[22rem] xl:w-[28.5rem] md:h-[17.8125rem] xl:h-[17.8125rem] lg:h-[14rem] "
+            />
+          </div>
         </Slider>
       </div>
     </div>
