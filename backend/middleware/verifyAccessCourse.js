@@ -13,7 +13,7 @@ export const verifyAccessCourse = async (req, res, next) => {
             req.course = course; // Store the course information in the request object
             next(); // Proceed to the next middleware or route handler
         } else {
-            res.status(200).json({ redirectTo: '/' });
+            res.status(400).json({ error: 'Course not purchased' });
         }
     } catch (err) {
         res.status(500).json({ error: err.message });

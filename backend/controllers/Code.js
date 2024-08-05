@@ -23,7 +23,6 @@ export const getStatus = async (req, res) => {
     } catch (err) {
         return res.status(400).json({ success: false, error: JSON.stringify(err) })
     }
-
 };
 
 export const runFile = async (req, res) => {

@@ -1,8 +1,28 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import { body, validationResult } from "express-validator";
 
 export const register = async (req, res) => {
+    await body('email')
+        .isEmail().withMessage('Invalid email address')
+        .custom(async (email) => {
+            const user = await User.findOne({ email });
+            if (user) {
+                throw new Error('Email already in use');
+            }
+        })
+        .run(req);
+
+    await body('password')
+        .isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+        .run(req);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         const {
             type,
@@ -33,7 +53,9 @@ export const register = async (req, res) => {
         });             // here the User mongoose schema is invoked and hashed password is stored 
 
         const savedUser = await newUser.save(); // this new user is stored in database
+        const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
 
+        res.status(201).json({ token, savedUser });
         res.status(201).json(savedUser);
 
     } catch (err) {

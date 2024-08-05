@@ -24,13 +24,12 @@ export const getCourse = async (req, res) => {
 // Check if user has access to a course
 // _id
 
-export const checkCourseAccess = async (req, res) => {
+export const getCourseAccess = async (req, res) => {
     try {
         console.log("checks out!");
         res.send("checks out");
-        
+        res.status(200).json({ message: 'Course can be accessed' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 }
-
