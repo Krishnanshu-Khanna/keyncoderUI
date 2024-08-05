@@ -3,91 +3,136 @@ import PostloginCard from "../components/PostloginCard";
 import CustomCalendar from "../components/CustomCalendar";
 import Statistics from "../components/Statistics";
 import CircularProgress from "../components/CircularProgress";
-import PostloginNavbar from "../utilities/PostloginNavbar";
+import Navbar from "../utilities/Navbar";
 import PostloginCourseCard from "../utilities/PostloginCourseCard";
 import LaptopSlider from "../components/LaptopSlider";
 import Footer from "../utilities/Footer";
+import { useNavigate } from "react-router-dom";
 
 const PostLogin = ({ theme, handleThemeSwitch }) => {
-  const [showStats, setShowstats] = useState(false);
+  const [showStats, setShowstats] = useState(true);
+  const navigate = useNavigate();
+  const handleNavigateDsa = () => {
+    navigate("/dsa");
+  };
+  const handleNavigatehome = () => {
+    navigate("/");
+  };
+
   return (
     <div
       className={`flex flex-col w-full h-full overflow-x-hidden ${
         theme === "dark" ? "bg-[#131313] text-white" : "bg-white text-black"
       }`}
     >
-      <PostloginNavbar handleThemeSwitch={handleThemeSwitch} theme={theme} />
+      <Navbar handleThemeSwitch={handleThemeSwitch} theme={theme} />
 
       {showStats ? (
-        <div>
-          <div className="flex ">
-            <PostloginCard theme={theme} />
-            <CustomCalendar theme={theme} />
-          </div>
-          <div className="text-2xl font-bold dark:white ml-[3%] mt-2">
-            My Statistics
-          </div>
+        //this component will be visible after course launch
+        // <div>
+        //   <div className="flex ">
+        //     <PostloginCard theme={theme} />
+        //     <CustomCalendar theme={theme} />
+        //   </div>
+        //   <div className="text-2xl font-bold dark:white ml-[3%] mt-2">
+        //     My Statistics
+        //   </div>
 
-          <div className="flex justify-between">
-            <div className="flex flex-col w-[40rem] ml-8">
-              <div className="flex w-full">
-                <Statistics theme={theme} />
-                <div className="flex flex-col justify-evenly items-center h-[300px]">
-                  <div className="bg-[#D8D8D8] py-2 rounded-2xl">
-                    <CircularProgress
-                      label="Productivity"
-                      value="100"
-                      width="100"
-                    />
-                  </div>
-                  <div className="bg-[#D8D8D8] py-2 rounded-2xl">
-                    <CircularProgress label="Quiz" value="75" width="100" />
-                  </div>
+        //   <div className="flex justify-between">
+        //     <div className="flex flex-col w-[40rem] ml-8">
+        //       <div className="flex w-full">
+        //         <Statistics theme={theme} />
+        //         <div className="flex flex-col justify-evenly items-center h-[300px]">
+        //           <div className="bg-[#D8D8D8] py-2 rounded-2xl">
+        //             <CircularProgress
+        //               label="Productivity"
+        //               value="100"
+        //               width="100"
+        //             />
+        //           </div>
+        //           <div className="bg-[#D8D8D8] py-2 rounded-2xl">
+        //             <CircularProgress label="Quiz" value="75" width="100" />
+        //           </div>
+        //         </div>
+        //       </div>
+        //       <div className="flex justify-between items-center bg-[#D8D8D8] w-[40rem] rounded-3xl p-3 mb-10">
+        //         <img
+        //           src="../images/dsa-postlogin.png"
+        //           alt=""
+        //           className="w-20"
+        //         />
+        //         <div className="mr-48">
+        //           <h3 className="font-bold">DSA</h3>
+        //           <div>1.1.1a Longest Subsequence</div>
+        //         </div>
+        //         <CircularProgress label="Practice" value="50" width="60" />
+        //       </div>
+        //     </div>
+        //     <div className="flex flex-col justify-center items-center  w-[43.5rem] mr-8 h-fit">
+        //       <PostloginCourseCard
+        //         theme={theme}
+        //         course="JAVA"
+        //         topic="Bitwise Operator"
+        //         img="network"
+        //         play={false}
+        //       />
+        //       <PostloginCourseCard
+        //         theme={theme}
+        //         course="DSA"
+        //         topic="Linked List"
+        //         img="dsa-postlogin"
+        //         play={true}
+        //       />
+        //       <PostloginCourseCard
+        //         theme={theme}
+        //         course="UI/UX"
+        //         topic="Auto Layout"
+        //         img="hack"
+        //         play={false}
+        //       />
+        //       <PostloginCourseCard
+        //         theme={theme}
+        //         course="PYTHON"
+        //         topic="Basics of Python Programming"
+        //         img="network"
+        //         play={true}
+        //       />
+        //     </div>
+        //   </div>
+        // </div>
+        <div className="bg-black ">
+          <div className="mt-40 ">
+            <div
+              className={`w-full h-[90vh]  ${
+                theme == "dark"
+                  ? "bg-black"
+                  : "bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900]"
+              }`}
+            >
+              <div className=" mx-10 md:mx-12 flex flex-col medium:flex-row items-center justify-between">
+                <div className="">
+                  <h1 className="max-w-xl text-4xl leading-[1.1] md:text-5xl md:leading-[1.3] font-bold text-white dark:text-white">
+                    {/* connect to databse amd fetch username */}
+                    Hey{" "}
+                    <span className="text-black dark:text-yellow-200">
+                      user!
+                    </span>{" "}
+                    You’ve got a knack for smart decisions
+                  </h1>
+                  <p className="text-[#FFB453] font-semibold mt-4 dark:text-[#e87f7f] md:text-[28px] max-w-sm mb-5">
+                    Your batch starts on Sept 6
+                  </p>
+                  <button
+                    onClick={handleNavigatehome}
+                    className="dark:bg-orange-600 bg-orange-500 shadow-lg hover:bg-orange-600 dark:hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg md:mt-0 mt-10  ml-24 sm:ml-0 lg:ml-0"
+                  >
+                    Home
+                  </button>
                 </div>
-              </div>
-              <div className="flex justify-between items-center bg-[#D8D8D8] w-[40rem] rounded-3xl p-3 mb-10">
-                <img
-                  src="../images/dsa-postlogin.png"
-                  alt=""
-                  className="w-20"
-                />
-                <div className="mr-48">
-                  <h3 className="font-bold">DSA</h3>
-                  <div>1.1.1a Longest Subsequence</div>
-                </div>
-                <CircularProgress label="Practice" value="50" width="60" />
+                <LaptopSlider />
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center  w-[43.5rem] mr-8 h-fit">
-              <PostloginCourseCard
-                theme={theme}
-                course="JAVA"
-                topic="Bitwise Operator"
-                img="network"
-                play={false}
-              />
-              <PostloginCourseCard
-                theme={theme}
-                course="DSA"
-                topic="Linked List"
-                img="dsa-postlogin"
-                play={true}
-              />
-              <PostloginCourseCard
-                theme={theme}
-                course="UI/UX"
-                topic="Auto Layout"
-                img="hack"
-                play={false}
-              />
-              <PostloginCourseCard
-                theme={theme}
-                course="PYTHON"
-                topic="Basics of Python Programming"
-                img="network"
-                play={true}
-              />
-            </div>
+            <Footer theme={theme} />
           </div>
         </div>
       ) : (
@@ -109,13 +154,17 @@ const PostLogin = ({ theme, handleThemeSwitch }) => {
                 <p className="text-[#FFB453] font-semibold mt-4 dark:text-[#e87f7f] md:text-[28px] max-w-sm mb-5">
                   Don't hesitate - Join now and get the finest available
                 </p>
-                <button className="dark:bg-orange-600 bg-orange-500 shadow-lg hover:bg-orange-600 dark:hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg md:mt-0 mt-10">
+                <button
+                  onClick={handleNavigateDsa}
+                  className="dark:bg-orange-600 bg-orange-500 shadow-lg hover:bg-orange-600 dark:hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg md:mt-0 mt-10"
+                >
                   Home
                 </button>
               </div>
               <LaptopSlider />
             </div>
-            <div className="absolute bottom-0 left-0 w-full z-10">
+            {/* commenting out the svg wave component inorder to make the page look good */}
+            {/* <div className="absolute bottom-0 left-0 w-full z-10">
               <svg
                 width="100%"
                 height="100%"
@@ -144,7 +193,7 @@ const PostLogin = ({ theme, handleThemeSwitch }) => {
                   fillOpacity="1"
                 ></path>
               </svg>
-            </div>
+            </div> */}
           </div>
           <Footer theme={theme} />
         </div>

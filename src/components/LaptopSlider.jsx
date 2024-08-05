@@ -12,6 +12,7 @@ const LaptopSlider = () => {
     speed: 2000,
     autoplaySpeed: 3000,
     cssEase: "linear",
+    arrows: false,
   };
 
   return (

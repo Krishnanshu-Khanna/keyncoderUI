@@ -27,7 +27,6 @@ const testimonials = [
 
 const Testimonials = ({ theme, type, course }) => {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 2,
