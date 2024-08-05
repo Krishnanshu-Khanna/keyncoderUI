@@ -40,7 +40,8 @@ function Reason({ theme }) {
             className=" mt-16 mb-0 w-[300px] sm:w-[500px] md:w-[600px] lg:w-[700px]"
           />
         </div>
-        {/* <div className="relative mt-0 p-0 mb-0">
+
+        <div className="relative mt-0 p-0 mb-0">
           <svg
             width="100%"
             height="100%"
@@ -56,7 +57,7 @@ function Reason({ theme }) {
               fillOpacity="1"
             ></path>
           </svg>
-        </div> */}
+        </div>
       </section>
     </>
   );

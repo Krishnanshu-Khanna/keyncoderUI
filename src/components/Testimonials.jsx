@@ -32,6 +32,7 @@ const Testimonials = ({ theme, type, course }) => {
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
+    arrows: false,
 
     autoplaySpeed: 2000,
     responsive: [
@@ -48,11 +49,11 @@ const Testimonials = ({ theme, type, course }) => {
   return (
     <div
       className={`flex flex-col text-center  ${
-        theme === "dark" ? "bg-[#131313]" : "bg-[#1d1534]"
+        theme === "dark" ? "bg-[#131313]" : "bg-[#181622]"
       } text-white ${course ? "bg-transparent" : ""}`}
     >
       <h1
-        className={`font-bold text-3xl md:text-5xl text-center  text-[#E5E5E5] ${
+        className={`mt-3 font-bold text-3xl md:text-5xl text-center  text-[#E5E5E5] ${
           course ? "text-black" : ""
         }`}
       >

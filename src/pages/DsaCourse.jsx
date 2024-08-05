@@ -1,5 +1,5 @@
 import Dsacourse from "../components/Dsacourse";
-import PostloginNavbar from "../utilities/PostloginNavbar";
+import Navbar from "../utilities/Navbar";
 function DsaCourse({ theme, handleThemeSwitch }) {
   return (
     <div
@@ -9,8 +9,8 @@ function DsaCourse({ theme, handleThemeSwitch }) {
           : "bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900] text-black"
       }`}
     >
-      <PostloginNavbar handleThemeSwitch={handleThemeSwitch} theme={theme}/>
-      <Dsacourse theme={theme}/>
+      <Navbar handleThemeSwitch={handleThemeSwitch} theme={theme} />
+      <Dsacourse theme={theme} />
     </div>
   );
 }

@@ -17,9 +17,9 @@ export default function Landing({ theme }) {
       <div className="mx-10 md:mx-12  p-6 md:mt-10 lg:mt-14 flex flex-col medium:flex-row items-center justify-between mt-11">
         <div className="space-y-4 md:space-y-10">
           <div className="w-full">
-            <h1 className="text-xl sm:text-xl md:text-4xl lg:text-8xl pt-8 leading-[1.0] sm:leading-[1.3] md:leading-[1.3] font-bold text-zinc-900 dark:text-white">
+            <h1 className="text-xl sm:text-xl md:text-4xl lg:text-6xl pt-8 leading-[1.0] sm:leading-[1.3] md:leading-[1.3] font-bold text-zinc-900 dark:text-white">
               <span className="dark:text-orange-500 ">From Classroom</span>
-              <span className="text-white"> to Career</span>
+              <span className="text-white lg:ml-1 md:ml-10 "> to Career</span>
             </h1>
           </div>
 

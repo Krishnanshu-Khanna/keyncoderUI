@@ -8,10 +8,27 @@ import PostloginCourseCard from "../utilities/PostloginCourseCard";
 import LaptopSlider from "../components/LaptopSlider";
 import Footer from "../utilities/Footer";
 import { useNavigate } from "react-router-dom";
+// import axios from 'axios';
 
 const PostLogin = ({ theme, handleThemeSwitch }) => {
   const [showStats, setShowstats] = useState(true);
   const navigate = useNavigate();
+
+  // const backendUrl = process.env.BACKEND_URL;
+  // const fetchShowStats = async () => {
+  //   try {
+  // have to adjust the endpoint according to the backend
+  //     const response = await axios.get(`${backendUrl}/api/showStats`);
+  //     setShowstats(response.data.showStats);
+  //   } catch (error) {
+  //     console.error('Error fetching showStats:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchShowStats();
+  // }, []);
+
   const handleNavigateDsa = () => {
     navigate("/dsa");
   };
@@ -100,7 +117,13 @@ const PostLogin = ({ theme, handleThemeSwitch }) => {
         //     </div>
         //   </div>
         // </div>
-        <div className="bg-black ">
+        <div
+          className={` ${
+            theme == "dark"
+              ? "bg-black"
+              : "bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900]"
+          }`}
+        >
           <div className="mt-40 ">
             <div
               className={`w-full h-[90vh]  ${

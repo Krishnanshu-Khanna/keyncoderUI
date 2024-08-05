@@ -26,7 +26,7 @@ export default function StudentsReview() {
       <h1 className=" text-start font-bold text-[25px] mt-5 mb-5 ml-[5%] ">
         Hear from our students
       </h1>
-      <div className="flex flex-col flex-wrap justify-between md:flex-row">
+      {/* <div className="flex flex-col flex-wrap justify-between md:flex-row">
         {testimonialData.map((data, index) => (
           <TestimonialCard
             key={index}
@@ -37,7 +37,7 @@ export default function StudentsReview() {
             testimony={data.testimony}
           />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
