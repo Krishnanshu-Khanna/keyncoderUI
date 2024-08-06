@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Toggle from "./Toggle"; // Import the Toggle component
 import Sidebar from "./Sidebar";
 
@@ -10,6 +10,7 @@ const Navbar = ({ theme, handleThemeSwitch }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const navRef = useRef(null);
+  let navigate = useNavigate();
 
   useEffect(() => {
     // Set the active link based on the current path
@@ -17,7 +18,7 @@ const Navbar = ({ theme, handleThemeSwitch }) => {
       case "/about":
         setActiveLink(0);
         break;
-      case "/batches":
+      case "/#courses":
         setActiveLink(1);
         break;
       case "/contact-us":
@@ -51,6 +52,10 @@ const Navbar = ({ theme, handleThemeSwitch }) => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handlesignout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
   return (
     <nav
       ref={navRef}
@@ -93,15 +98,20 @@ const Navbar = ({ theme, handleThemeSwitch }) => {
           </li>
           <li>
             <Link
-              to="/batches"
+              to="/#courses"
               className={`font-medium dark:text-white ${
                 activeLink === 1
                   ? "text-orange-600 underline decoration-2 decoration-orange-400 underline-offset-8"
                   : ""
               } hover:text-orange-600`}
-              onClick={handleLinkClick}
+              onClick={() => {
+                document
+                  .getElementById("courses")
+                  .scrollIntoView({ behavior: "smooth" });
+                handleLinkClick(); // Update activeLink or any other state
+              }}
             >
-              Batches
+              Courses
             </Link>
           </li>
           <li>
@@ -120,11 +130,20 @@ const Navbar = ({ theme, handleThemeSwitch }) => {
         </ul>
         {/* Replace theme switch button with Toggle component */}
         <Toggle toggled={theme === "dark"} onClick={handleThemeSwitch} />
-        <Link to="/login">
-          <button className="font-medium dark:text-white border-2 border-orange-500 rounded-lg px-4 py-2 hover:bg-orange-500 hover:text-white focus:outline-none">
-            SignIn
+        {!localStorage.getItem("token") ? (
+          <Link to="/login">
+            <button className="font-medium dark:text-white border-2 border-orange-500 rounded-lg px-4 py-2 hover:bg-orange-500 hover:text-white focus:outline-none">
+              SignIn
+            </button>
+          </Link>
+        ) : (
+          <button
+            onClick={handlesignout}
+            className="font-medium dark:text-white border-2 border-orange-500 rounded-lg px-4 py-2 hover:bg-orange-500 hover:text-white focus:outline-none"
+          >
+            SignOut
           </button>
-        </Link>
+        )}
       </span>
       {isSidebarOpen && (
         <Sidebar

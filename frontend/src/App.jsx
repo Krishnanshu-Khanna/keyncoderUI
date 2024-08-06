@@ -17,9 +17,13 @@ import MentorProfile from "./pages/MentorProfile.jsx";
 import JobAlerts from "./pages/JobAlerts.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import QuestionPage from "./pages/QuestionsPage.jsx";
+import Forgotpassword from "./pages/Forgotpassword.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const notify = (message) => toast(message);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -119,14 +123,27 @@ const App = () => {
               <JobAlerts theme={theme} handleThemeSwitch={handleThemeSwitch} />
             }
           />
-          <Route path='/questions' element={
-            <QuestionPage theme={theme} handleThemeSwitch={handleThemeSwitch}/>
-          }/>
+          <Route
+            path="/questions"
+            element={
+              <QuestionPage
+                theme={theme}
+                handleThemeSwitch={handleThemeSwitch}
+              />
+            }
+          />
           <Route
             path="/user-profile"
             element={
-              <UserProfile theme={theme} handleThemeSwitch={handleThemeSwitch} />
+              <UserProfile
+                theme={theme}
+                handleThemeSwitch={handleThemeSwitch}
+              />
             }
+          />
+          <Route
+            path="/forgotPass"
+            element={<Forgotpassword notify={notify} />}
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

@@ -1,6 +1,7 @@
 import Courses from "./Courses";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 export default function Landing({ theme }) {
   const handleClick = () => {
     <Courses />;
@@ -13,33 +14,34 @@ export default function Landing({ theme }) {
           : " bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900] "
       }
     >
-      <div className="mx-10 md:mx-12 mt-1 p-6 md:p-12 flex flex-col medium:flex-row items-center justify-between">
-        <div className="space-y-1 md:space-y-10">
-          <h1 className="text-4xl pt-8 leading-[1.1] md:text-5xl md:leading-[1.3] font-bold text-zinc-900 dark:text-white">
-            Unlock your
-            <br />
-            Knowledge
-          </h1>
-          <p className="text-white dark:text-[#A4A4A4] md:text-[28px] max-w-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            pharetra, phasellus imperdiet fringilla turpis lectus risus erat.
-            Commodo purus, eu sed suspendisse fermentum.
+      <div className="mx-10 md:mx-12  p-6 md:mt-10 lg:mt-14 flex flex-col medium:flex-row items-center justify-between mt-11">
+        <div className="space-y-4 md:space-y-10">
+          <div className="w-full">
+            <h1 className="text-xl sm:text-xl md:text-4xl lg:text-6xl pt-8 leading-[1.0] sm:leading-[1.3] md:leading-[1.3] font-bold text-zinc-900 dark:text-white">
+              <span className="dark:text-orange-500 ">From Classroom</span>
+              <span className="text-white lg:ml-1 md:ml-10 "> to Career</span>
+            </h1>
+          </div>
+
+          <p className="text-white dark:text-[#A4A4A4] md:text-[28px] lg:text-[30px] max-w-lg mb-5 text-[14px] ">
+            Building Bridges Between Education and Industry for Tomorrow's Tech
+            Leaders, keyNcoders Connects You with Tech Success.
           </p>
-          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-            <button className="dark:bg-orange-600 bg-orange-500 dark:shadow-custom hover:shadow-lg hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
-              Lorem ipsum
-            </button>
-            <button className="bg-transparent hover:bg-orange-500 text-white  dark:text-orange-600 hover:text-white border border-gray-100 dark:border-orange-600 py-2 px-4 rounded-lg flex items-center shadow-custom">
-              <FontAwesomeIcon icon={faCartShopping} onClick={handleClick} />
-              Add to cart
-            </button>
+          <div className="flex flex-row justify-center items-center mx-auto">
+            <Link
+              to={"/dsa"}
+              className="dark:bg-orange-600 bg-orange-500 shadow-custom hover:shadow-lg hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg md:mt-0 mt-10   w-fit text-center"
+            >
+              Join Now
+            </Link>
           </div>
         </div>
-        <div className="mt-12 md:mt-[100px]">
+
+        <div className="mt-0 bottom-0">
           <img
-            src="../images/hero.png"
+            src="../images/hero2.png"
             alt="Person pointing"
-            className="max-w-xs medium:max-w-lg m-6 medium:m-2 rounded-lg "
+            className="max-w-xs md:max-w-lg lg:max-w-xl m-6 medium:m-2 rounded-lg "
           />
         </div>
       </div>
@@ -63,7 +65,7 @@ export default function Landing({ theme }) {
             d="M0,160L40,181.3C80,203,160,245,240,261.3C320,277,400,267,480,245.3C560,224,640,192,720,197.3C800,203,880,245,960,256C1040,267,1120,245,1200,218.7C1280,192,1360,160,1400,144L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
             stroke="none"
             strokeWidth="0"
-            fill={theme === "dark" ? "url(#gradient)" : "#1D1534"}
+            fill={theme === "dark" ? "url(#gradient)" : "#181622"}
             fillOpacity="1"
           ></path>
         </svg>

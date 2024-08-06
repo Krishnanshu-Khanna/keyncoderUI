@@ -16,12 +16,16 @@ export default {
 				roboto: ['"Roboto"'],
 			},
 			screens: {
-				"small": "830px",
-				"medium":"1000px"
+				small: "830px",
+				medium: "1000px",
+			},
+			backgroundColor: {
+				"white-opacity-20": "rgba(255, 255, 255, 0.2)", // Custom opacity for white background
+			},
+			backgroundImage: {
+				"custom-gradient": "linear-gradient(to right,#212121,#313131, #616161)",
 			},
 		},
 	},
 	plugins: [],
 };
-
-

@@ -1,7 +1,7 @@
 function MentorCard() {
   return (
     <div>
-      <div className="w-[400px] mx-auto overflow-hidden bg-[#E7E4E4] rounded-lg shadow-lg dark:bg-[#4E4848]">
+      <div className="md:w-[400px] w-fit md:mx-auto mx-4 overflow-hidden bg-[#E7E4E4] rounded-lg shadow-lg dark:bg-[#4E4848]">
         <div
           className="h-24 w-24 md:h-32 md:w-32 mt-2 mx-auto rounded-full overflow-hidden"
           style={{ border: "5px solid black" }}

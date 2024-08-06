@@ -14,7 +14,7 @@ function CallToAction({ theme }) {
         <p className="mt-4 mb-16 text-base md:text-lg text-[#8A8A8A] text-center">
           Lorem Ipsum courses we have? lorem ipsum
         </p>
-        <div className="flex justify-center mt-1 w-4/5 h-[90px] dark:bg-[#645B5B] bg-white">
+        <div className="flex justify-center mt-1 w-full h-[90px] dark:bg-[#645B5B] bg-white">
           <img
             src="../images/companie.png"
             alt="Companies"
