@@ -16,7 +16,7 @@ function Footer({ theme }) {
         theme === "dark" ? "bg-[#232222]" : "bg-[#E6E6E6]"
       } text-black dark:text-zinc-600 body-font`}
     >
-      <div className="container mx-auto px-5 pt-8">
+      <div className="container mx-auto px-5 pt-[15px]">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <p className="text-black font-bold text-base md:text-lg text-center md:text-left mb-4 md:mb-0">
             <img
