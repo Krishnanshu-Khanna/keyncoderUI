@@ -1,20 +1,76 @@
+import { useEffect, useState } from "react";
 import Courses from "./Courses";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+
 export default function Landing({ theme }) {
-  const handleClick = () => {
-    <Courses />;
+  const [modal, showModal] = useState(true);
+
+  useEffect(() => {
+    showModal(true);
+  }, []);
+
+  const handleCloseModal = () => {
+    showModal(false);
   };
+
+  const handlemodlacloseclick = () => {
+    showModal(false);
+  };
+
   return (
     <div
       className={
-        theme == "dark"
-          ? " bg-[#131313]"
-          : " bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900] "
+        theme === "dark"
+          ? "bg-[#131313]"
+          : "bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900]"
       }
     >
-      <div className="mx-10 md:mx-12  p-6 md:mt-10 lg:mt-14 flex flex-col medium:flex-row items-center justify-between mt-11">
+      {modal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+          <div className="bg-emerald-300 text-black p-8 rounded-lg shadow-lg relative max-w-md mx-auto">
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-2 right-2 text-black text-2xl hover:text-3xl hover:scale-110 transition-transform duration-300"
+            >
+              ×
+            </button>
+            <div className="flex flex-col items-center">
+              <img
+                src="../images/modal_alt.png"
+                alt="Modal Image"
+                className="w-fit h-fit rounded-t-lg"
+              />
+              <div className="text-center p-6 bg-white shadow-lg rounded-lg border border-gray-200 mt-2">
+                <h2 className="text-3xl font-extrabold text-gray-800 mb-2">
+                  Early Bird Offer
+                </h2>
+                <p className="text-lg text-gray-600 mb-4">
+                  Limited seats available
+                </p>
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl font-bold text-orange-500 mb-2">
+                    ₹3499
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    Save flat 30% off the regular price!
+                  </span>
+                </div>
+              </div>
+
+              <button
+                className="mt-4 rounded-md bg-orange-600 w-16 h-10  text-white"
+                onClick={handlemodlacloseclick}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="mx-10 md:mx-12 p-6 md:mt-10 lg:mt-14 flex flex-col md:flex-row items-center justify-between mt-11">
         <div className="space-y-4 md:space-y-10">
           <div className="w-full">
             <h1 className="text-xl sm:text-xl md:text-4xl lg:text-6xl pt-8 leading-[1.0] sm:leading-[1.3] md:leading-[1.3] font-bold text-zinc-900 dark:text-white">
@@ -30,7 +86,7 @@ export default function Landing({ theme }) {
           <div className="flex flex-row justify-center items-center mx-auto">
             <Link
               to={"/dsa"}
-              className="dark:bg-orange-600 bg-orange-500 shadow-custom hover:shadow-lg hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg md:mt-0 mt-10   w-fit text-center"
+              className="dark:bg-orange-600 bg-orange-500 shadow-custom hover:shadow-lg hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg md:mt-0 mt-10 w-fit text-center"
             >
               Join Now
             </Link>
@@ -41,7 +97,7 @@ export default function Landing({ theme }) {
           <img
             src="../images/hero2.png"
             alt="Person pointing"
-            className="max-w-xs md:max-w-lg lg:max-w-xl m-6 medium:m-2 rounded-lg "
+            className="max-w-xs md:max-w-lg lg:max-w-xl m-6 md:m-2 rounded-lg"
           />
         </div>
       </div>
@@ -51,7 +107,7 @@ export default function Landing({ theme }) {
           height="100%"
           color="#ED374D"
           id="svg"
-          viewBox="0 0 1440 310" // Changed the viewBox to better fit the wave
+          viewBox="0 0 1440 310"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>

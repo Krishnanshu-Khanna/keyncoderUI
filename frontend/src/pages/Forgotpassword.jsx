@@ -3,37 +3,35 @@ import React, { useState } from "react";
 const Forgotpassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
-  const API_URL = "http://localhost:3001"; // Replace with your actual API URL
+  const API_URL = "http://localhost:5000"; // Replace with your actual API URL
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    // try {
-    //   const response = await fetch(`${API_URL}/auth/forgot-password`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ email }),
-    //   });
+    try {
+      const response = await fetch(`${API_URL}/auth/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    //   const json = await response.json();
-    //   if (json.success) {
-    //     setMessage("Password reset email sent.");
-    //   } else {
-    //     setMessage("User does not text");
-    //   }
-    // } catch (error) {
-    //   console.error("An error occurred:", error);
-    //   setMessage("An error occurred. Please try again later.");
-    // }
-    setMessage("If user exixts email has been sent");
+      const data = await response.json();
+      if (response.ok) {
+        setMessage(data); // Displaying success message
+      } else {
+        setMessage(data.error); // Displaying error message
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setMessage("An error occurred. Please try again later.");
+    }
   };
 
   return (
     <>
       <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
-      <div className="flex justify-center items-center h-screen ">
+      <div className="flex justify-center items-center h-screen">
         <form
           onSubmit={handleForgotPassword}
           className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg border border-gray-300"
@@ -61,7 +59,7 @@ const Forgotpassword = () => {
             Submit
           </button>
           {message && (
-            <p className="mt-4 text-center text-gray-700 text-xl  font-bold">
+            <p className="mt-4 text-center text-gray-700 text-xl font-bold">
               {message}
             </p>
           )}
