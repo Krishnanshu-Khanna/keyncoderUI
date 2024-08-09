@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import authRoutes from "./routes/auth.js";
 import courseRoutes from "./routes/course.js";
 import codeRoutes from "./routes/code.js";
+import adminRoutes from "./routes/admin.js";
 
 config();
 const app = express();
@@ -21,12 +22,13 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/course", courseRoutes);
 app.use("/code", codeRoutes);
+app.use("/admin", adminRoutes);
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.DATABASE_URL)
   .then(() => {
     app.listen(process.env.PORT, "0.0.0.0", () =>
-      console.log(`Server running at http://68.178.159.26:${process.env.PORT}`)
+      console.log(`Server running at http://localhost:${process.env.PORT}`)
     );
   })
   .catch((error) => console.log(`${error} did not connect`));
