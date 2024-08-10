@@ -51,23 +51,42 @@ function AboutUs({ handleThemeSwitch, theme }) {
         </div>
       </section>
 
-      <section className={`bg-[#D9D9D9] dark:bg-[#1a1a1a] h-fit mt-[-2px]`}>
+      <section className={`bg-[#D9D9D9] dark:bg-[#1a1a1a] h-fit `}>
         <div className="flex flex-col md:flex-row p-10 md:p-20 justify-around">
-          <div className="h-[200px] md:h-[500px] w-full md:w-[600px] rounded-3xl bg-gray-200 dark:bg-gray-700 mb-10 md:mb-0"></div>
-          <div className="w-full md:w-[600px] flex flex-col items-start p-5 md:p-20">
-            <div className="flex justify-center gap-5 items-center mb-4">
-              <div className="h-[60px] w-[6px] bg-[#FF0000]"></div>
-              <h1 className="text-[#FF0000] text-[30px] md:text-[40px]">
-                🔄 A LITTLE HISTORY
-              </h1>
+          <div className="flex-col sm:flex md:flex lg:flex-row">
+            <img
+              src="/images/about.png"
+              alt="Founders"
+              className="h-[200px] md:h-[500px] w-full md:w-[600px] rounded-3xl bg-gray-200 dark:bg-gray-700 "
+            ></img>
+            <div className="w-full md:w-[600px] flex flex-col items-start p-5 mx-5">
+              <div className="flex justify-center gap-5 items-center mb-4">
+                <div className="h-[60px] w-[6px] bg-[#FF0000]"></div>
+                <h1 className="text-[#FF0000] text-[30px] md:text-[40px]">
+                  🔄 A LITTLE HISTORY
+                </h1>
+              </div>
+              <p className="dark:text-gray-400 w-full  md:w-[90%] lg:w-[99%] text-left">
+                In January 2023, we noticed a striking trend: a surge in student
+                enrollments in BCA and other tech-related degrees. However, a
+                concerning statistic quickly came to our attention—only about 1%
+                of these students were successfully transitioning their
+                education into viable careers. This discrepancy highlighted a
+                significant gap that needed addressing. Driven by this insight,
+                we embarked on a mission. From January 2023 to May 2024, we
+                devoted ourselves to developing a solution. We meticulously
+                researched over 50 colleges and engaged with more than 4,000
+                students to understand their needs and challenges better. Our
+                efforts culminated in the creation of keyNcoders—a comprehensive
+                training and placement platform designed to bridge the gap
+                between education and career success. Regardless of your
+                background or the program you're enrolled in, we are here to be
+                your dedicated partner in training and career placement. At
+                keyNcoders, we are committed to transforming potential into
+                achievement, ensuring that every student has the opportunity to
+                turn their education into a successful career.
+              </p>
             </div>
-            <p className="dark:text-gray-400 w-full md:w-[90%] text-left">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s. Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s.
-            </p>
           </div>
         </div>
       </section>
@@ -107,22 +126,35 @@ function AboutUs({ handleThemeSwitch, theme }) {
       </section>
       <section className={`bg-[#D9D9D9] dark:bg-[#1a1a1a] h-fit p-10 md:p-20`}>
         <h1 className=" dark:text-gray-300 font-bold text-[30px] md:text-[40px] text-center mb-10">
-          Meet Our Founders
+          Meet Our Founder
         </h1>
         <div className="flex flex-col md:flex-row items-center md:items-start justify-around">
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h2 className="text-[#FF6652] font-semibold text-[20px] md:text-[30px] mb-4">
-              Lorem Ipsum
+              Nitish Kummar Mehta
             </h2>
             <p className="dark:text-gray-400 text-justify">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure
-              nisi esse ipsa quis id iusto, cupiditate illo soluta explicabo
-              optio? Ipsam accusamus, maxime reprehenderit nesciunt molestias
-              culpa debitis odio expedita!Lorem Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Voluptatum delectus dolore id quae
-              exercitationem molestiae natus distinctio porro voluptates fugit
-              architecto laudantium veritatis, suscipit enim vel nostrum,
-              accusantium pariatur. Ullam.
+              Nitish always envisioned an entrepreneurial path, driven by a
+              desire to make a difference. Growing up in a tier 2 city, he
+              recognized the challenges faced by aspiring tech professionals in
+              his community. He noticed that many viewed BCA as just a degree
+              with limited opportunities and a dead end after graduation, but he
+              believed it could be so much more. Nitish thought, “Why should
+              people restrict themselves just for the sake of graduation? There
+              are countless individuals from these backgrounds achieving great
+              things in tech, so why not make it a viable option?” What was
+              missing was a platform to train and guide these individuals,
+              exposing them to the various paths they could explore in the tech
+              industry with onsite placement opportunities. With a vision that
+              transcends background and financial constraints, Nitish founded
+              keyNcoders to support those who want to enter the tech field but
+              can’t afford traditional engineering degrees. He also saw the need
+              to address the lack of functional placement cells in local
+              colleges, prompting him to create a space where aspiring tech
+              enthusiasts could thrive and connect. Through keyNcoders, Nitish
+              aims to empower individuals from all walks of life, providing them
+              with the skills and support they need to succeed in
+              the tech industry.
             </p>
           </div>
           <img src="/images/human.png" alt="Founders" className="rounded-lg" />

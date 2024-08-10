@@ -3,11 +3,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+dotenv.config();
 
 const EMAIL_ID = process.env.EMAIL_ID;
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD;
 
 export const register = async (req, res) => {
   try {
@@ -71,10 +73,10 @@ export const login = async (req, res) => {
 };
 
 const transporter = nodemailer.createTransport({
-  service: "Gmail",
+  service: "gmail",
   auth: {
     user: EMAIL_ID,
-    pass: EMAIL_PASSWORD,
+    pass: EMAIL_APP_PASSWORD,
   },
 });
 

@@ -1,6 +1,6 @@
 import Razorpay from "razorpay";
 import crypto from "crypto";
-import Course from "../models/course.js";
+import Course from "../models/Course.js";
 
 const razorpay = new Razorpay({
   key_id: RAZORPAY_KEY_ID,

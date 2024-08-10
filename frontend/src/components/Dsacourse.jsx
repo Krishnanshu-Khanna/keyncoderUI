@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Footer from "../utilities/Footer";
-import axios from "axios";
 import Testimonials from "./Testimonials";
 import { Link } from "react-router-dom";
 
 export default function Landing({ theme }) {
   const [expanded, setExpanded] = useState({});
+  const refs = useRef([]);
 
   const topics = [
     {
@@ -91,12 +91,26 @@ export default function Landing({ theme }) {
       subtopics: ["Standard Template Library (STL)"],
     },
   ];
+
   const toggleExpand = (id) => {
     setExpanded((prevState) => ({
       ...prevState,
       [id]: !prevState[id],
     }));
   };
+
+  const handleClickOutside = (event) => {
+    if (refs.current.every((ref) => ref && !ref.contains(event.target))) {
+      setExpanded({});
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const length = topics?.length || 0;
 
@@ -161,7 +175,7 @@ export default function Landing({ theme }) {
           </div>
         </div>
 
-        <div className="container flex flex-col justify-center p-4 bg-white dark:bg-[#131313]">
+        <div className="container flex flex-col justify-center p-4 bg-white dark:bg-[#131313] ">
           <div className="text-3xl font-bold text-center dark:text-white">
             Why should you take this course
           </div>
@@ -174,35 +188,38 @@ export default function Landing({ theme }) {
           </div>
         </div>
 
-        <div className="pb-4">
+        <div className="pb-4 cursor-pointer">
           <div className="mx-28 mb-10 text-left">
             <h1 className="text-3xl font-bold mt-6">This Course Includes:</h1>
           </div>
 
-          {length > 0 ? (
-            topics.map((topic) => (
+          {topics.length > 0 ? (
+            topics.map((topic, index) => (
               <div
                 key={topic.id}
+                ref={(el) => (refs.current[index] = el)}
                 className={`container mx-auto p-4 my-2 rounded-lg shadow-lg ${
                   expanded[topic.id]
-                    ? "bg-orange-500 dark:bg-orange-700"
+                    ? "bg-gradient-to-r from-[#ED374D] via-[#FA793F] to-[#FCB900]"
                     : "bg-slate-200 dark:bg-custom-gradient"
                 } mt-1 w-4/5`}
+                onClick={() => toggleExpand(topic.id)}
               >
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold">{topic.title}</h2>
-                  <div className="flex font-bold">
-                    <button
-                      onClick={() => toggleExpand(topic.id)}
-                      className="ml-5 focus:outline-none"
-                    >
-                      {expanded[topic.id] ? (
-                        <IoIosArrowUp size={24} />
-                      ) : (
-                        <IoIosArrowDown size={24} />
-                      )}
-                    </button>
-                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevents click from bubbling up
+                      toggleExpand(topic.id);
+                    }}
+                    className="ml-5 focus:outline-none"
+                  >
+                    {expanded[topic.id] ? (
+                      <IoIosArrowUp size={24} />
+                    ) : (
+                      <IoIosArrowDown size={24} />
+                    )}
+                  </button>
                 </div>
                 {expanded[topic.id] && (
                   <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-0 list-none">
@@ -260,8 +277,8 @@ export default function Landing({ theme }) {
               <div className="mb-4 md:mb-0  ">
                 {/* Aligning image the text adjusts accordingly */}
                 <img
-                  src="./images/Marry.png"
-                  className=" w-full sm:w-44  md:w-96 h-auto rounded-xl border-slate-800 mx-auto md:mx-0"
+                  src="./images/mentor_ayush.jpeg"
+                  className=" w-full sm:w-44 lg:w-[1024px]  md:w-96 h-auto rounded-xl border-slate-800 mx-auto md:mx-0"
                   alt="Marry"
                 />
                 {/* Adjust in terms of div container */}
@@ -270,11 +287,18 @@ export default function Landing({ theme }) {
                 </div>
               </div>
               <div className=" text-center md:text-left">
-                <div className="text-[14px] sm:text-[15px] md:text-xl lg:text-2xl text-black">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Aliquam, dolor voluptatem, eveniet accusantium dolore eius
-                  libero molestiae et commodi doloremque vel omnis neque placeat
-                  nam adipisci debitis optio, consequuntur laudantium.
+                <div className="text-[14px] sm:text-[15px] md:text-xl lg:text-xl text-black">
+                  Ayush Singh, a B.Tech from IIT Kharagpur, is a distinguished
+                  figure in competitive programming and machine learning. His
+                  impressive credentials include being an Amazon ML-2023, a
+                  pre-finalist in TVS EPLC 5.0 .Ayush is also recognized as an
+                  expert status on Codeforces , Guardian on LeetCode and a
+                  5-Star Coder on CodeChef. He achieved 1st place in Overnite
+                  2024 at IIT Kharagpur and has secured notable global ranks,
+                  including 49 at CodeChef Starters, 137 at Codeforces, and 164
+                  at LeetCode Bi-weekly. Additionally, he earned a Global rank
+                  of 205 in the Meta Hacker Cup 2023 and secured an All India
+                  Rank of 30 in MTSE 2018.
                 </div>
               </div>
             </div>

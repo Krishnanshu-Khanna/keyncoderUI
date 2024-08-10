@@ -1,51 +1,80 @@
 // src/components/Signup.js
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import zxcvbn from "zxcvbn";
 import { register } from "../api/SignUp"; // Import the register function
+import Spinner from "../components/Spinner";
 
-function Signup({ theme }) {
+function Signup({ theme, notify }) {
+  const imgRef = useRef();
+  const passRef = useRef();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const API_URL = "http://localhost:3001"; // Replace with your actual API URL
-
+  // const backendUrl = process.env.BACKEND_URL; Replace with your actual API URL
+  const backendUrl = "http://localhost:5000";
   const navigate = useNavigate();
+
+  const checkPasswordStrength = (password) => {
+    const hasLetters = /[a-zA-Z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const isValidLength = password.length >= 6;
+
+    return hasLetters && hasNumbers && isValidLength;
+  };
+
+  const showpass = () => {
+    if (passRef.current.type === "password") {
+      passRef.current.type = "text";
+      imgRef.current.src = "../images/Eyecross.png";
+    } else {
+      passRef.current.type = "password";
+      imgRef.current.src = "../images/Eyeopen.png";
+    }
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    //for testing purpose later on, we have to add this to try block
-    navigate("/login");
-    // try {
-    //    const data = await register(name, email, password);
-    //    Handle the response data (e.g., show a success message, navigate)
-    //    give notification successfully regiters
-    //    alert("Successfully registered");
-    //   add the bakend server link along with the api endpoint below
-    //   const response = await fetch("", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       name: name,
-    //       email: email,
-    //       password: password,
-    //     }),
-    //   });
-    //   const json = await response.json();
-    //   console.log(json);
-    //   if (json.success) {
-    //     // Save the token and redirect
-    //     localStorage.setItem("token", json.token);
-    //     navigate("/login");
-    //     //we can show a laert saying welcome back
-    //   } else {
-    //     //have to how an alert for failed login
-    //   }
-    // } catch (error) {
-    //   alert(error.message);
-    // }
+    setLoading(true);
+    if (!checkPasswordStrength(password)) {
+      return;
+    }
+    try {
+      const response = await fetch(`${backendUrl}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+        }),
+      });
+      const json = await response.json();
+      console.log(json);
+      if (response.ok) {
+        // Save the token and redirect
+        localStorage.setItem("token", json.authtoken);
+        localStorage.setItem("userdeatils", json.savedUser);
+        localStorage.setItem("resetPasswordToken", json.resetPasswordToken);
+        navigate("/login");
+      } else {
+        const savedUser = localStorage.getItem("savedUser");
+        if (savedUser) {
+          notify("Email already exists");
+        } else {
+          notify("Invalid details");
+        }
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -105,7 +134,7 @@ function Signup({ theme }) {
                 className="w-full px-3 py-2 border border-zinc-300 group-focus:border-orange-500 rounded-md dark:bg-[#292626]"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-2 relative">
               <label
                 htmlFor="password"
                 className="block text-zinc-700 dark:text-[#A4A4A4]"
@@ -113,37 +142,70 @@ function Signup({ theme }) {
                 Password
               </label>
               <input
+                ref={passRef}
                 type="password"
                 id="password"
                 name="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-zinc-300 rounded-md dark:bg-[#292626]"
+                className={`py-2 w-full px-3  border border-zinc-300 rounded-md dark:bg-[#292626] ${
+                  password && !checkPasswordStrength(password)
+                    ? "border-red-500"
+                    : "hello"
+                }`}
               />
+
+              <span
+                className="absolute inset-y-4 mt-5 right-0 flex items-center pr-3 cursor-pointer"
+                onClick={showpass}
+              >
+                <img
+                  ref={imgRef}
+                  width={24}
+                  src="../images/Eyeopen.png"
+                  alt="Eye"
+                />
+              </span>
             </div>
+            {password ? (
+              !checkPasswordStrength(password) && (
+                <p className="text-red-500 text-xs">
+                  Password must contain letters & numbers
+                </p>
+              )
+            ) : password.length === 0 ? (
+              <p className="text-yellow-500 text-xs">Please enter a password</p>
+            ) : (
+              <p className="text-yellow-500 text-xs"></p>
+            )}
             <button
+              disabled={loading}
               type="submit"
-              className={`w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg ${
+              className={`mt-2 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg ${
                 theme === "dark"
                   ? "dark:bg-orange-600 dark:hover:bg-gray-600"
                   : ""
               }`}
             >
-              Sign up now
+              {loading && (
+                <Spinner className="absolute inset-0 m-auto w-6 h-6" />
+              )}
+              {!loading && "SignUp"}
             </button>
             <p className="flex flex-row justify-center items-center gap-6 my-4">
               <span className="border-t-2 w-full border-gray-500"></span>
               <span>or</span>
               <span className="border-t-2 w-full border-gray-500"></span>
             </p>
-            <button
+            {/* for future purposes */}
+            {/* <button
               type="button"
               className={`w-full flex flex-row border border-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg justify-evenly`}
             >
               <img src="images/google.png" alt="" className="w-6" />
               <span className="font-medium">Sign up with Google</span>
-            </button>
+            </button> */}
             <p className="mt-4 text-center text-zinc-600 dark:text-[#A4A4A4]">
               Already have an account?{" "}
               <Link to={"/login"} className="text-blue-500 hover:text-blue-600">

@@ -1,4 +1,11 @@
-import Course from "../models/course.js";
+import Course from "../models/Course.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const EMAIL_ID = process.env.EMAIL_ID;
+const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD;
 
 export const create_course = async (req, res) => {
   const course = new Course(req.body);
@@ -81,6 +88,32 @@ export const delete_course = async (req, res) => {
     }
 
     res.send(course);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: EMAIL_ID,
+    pass: EMAIL_APP_PASSWORD,
+  },
+});
+
+export const contact_us = async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    const mailOptions = {
+      from: EMAIL_ID,
+      to: EMAIL_ID,
+      subject: `Contact us form submission from ${name}`,
+      text: `Sender: ${email}\n\nMessage: ${message}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.send(`Message from ${name} sent successfully`);
   } catch (error) {
     res.status(500).send(error);
   }

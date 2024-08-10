@@ -13,7 +13,7 @@ function Footer({ theme }) {
   return (
     <footer
       className={`${
-        theme === "dark" ? "bg-[#232222]" : "bg-[#E6E6E6]"
+        theme === "dark" ? "bg-[#232222] " : "bg-[#E6E6E6]"
       } text-black dark:text-zinc-600 body-font`}
     >
       <div className="container mx-auto px-5 pt-[15px]">
@@ -44,51 +44,79 @@ function Footer({ theme }) {
         <div className="flex flex-col md:flex-row items-center justify-between py-4">
           <p className="text-sm md:text-base text-center md:text-left dark:text-gray-400 mb-3">
             <span className="flex  items-center">
-              <span className="md:text-[25px] sm:text-[25px] sm: mr-2 ">©</span>
-              2024 keyNcoders
+              <span className="dark:text-white md:text-[25px] sm:text-[25px] sm: mr-2 ">
+                ©
+              </span>
+              <span className="dark:text-white">2024 keyNcoders</span>
             </span>
           </p>
           <span className="flex flex-col md:flex-row justify-center items-center md:gap-8 dark:text-gray-400 ">
             <Link
               to="/dsa"
-              className="text-base md:text-lg dark:text-gray-400 text-black "
+              className="text-base md:text-lg dark:text-white text-black hover:scale-110"
             >
               Product
             </Link>
             <a
-              href="#"
-              className="text-base md:text-lg dark:text-gray-400 text-black "
+              href="https://t.me/keyncoders"
+              className="text-base md:text-lg dark:text-white text-black hover:scale-110 "
             >
               Community
             </a>
             <Link
               to="/contact-us"
-              className="text-base md:text-lg dark:text-gray-400 text-black "
+              className="text-base md:text-lg dark:text-white text-black hover:scale-110 "
             >
               Support
             </Link>
           </span>
           <div className="flex flex-row gap-4 mt-2 md:m-0 md:gap-8">
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
-            />
-            <FontAwesomeIcon
-              icon={faLinkedin}
-              className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
-            />
-            <FontAwesomeIcon
+            <Link
+              target="_blank"
+              to="https://www.facebook.com/share/tkYX1gKeBNkDYmJU/?mibextid=qi2Omg"
+              type="button"
+            >
+              <FontAwesomeIcon
+                icon={faFacebook}
+                className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
+              />
+            </Link>
+            <Link
+              target="_blank"
+              to="https://www.linkedin.com/company/keyncoders/"
+              type="button"
+            >
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
+              />
+            </Link>
+            {/* will add in future */}
+            {/* <FontAwesomeIcon
               icon={faTwitter}
               className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
-            />
-            <FontAwesomeIcon
-              icon={faYoutube}
-              className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
-            />
-            <FontAwesomeIcon
-              icon={faInstagram}
-              className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
-            />
+            /> */}
+            <Link
+              target="_blank"
+              to="https://youtube.com/@keyncoders?feature=shared
+"
+              type="button"
+            >
+              <FontAwesomeIcon
+                icon={faYoutube}
+                className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
+              />
+            </Link>
+            <Link
+              target="_blank"
+              to="https://www.instagram.com/keyncoders?igsh=MTM3MG1vZm05ejlxaA=="
+              type="button"
+            >
+              <FontAwesomeIcon
+                icon={faInstagram}
+                className="dark:text-[#B0B8BC] text-black h-5 md:h-6"
+              />
+            </Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+
 const LaptopSlider = () => {
   const settings = {
     dots: false,
@@ -16,33 +17,29 @@ const LaptopSlider = () => {
   };
 
   return (
-    <div className="relative mt-16">
-      <img
-        src="../images/laptop.png"
-        alt="Laptop Slider"
-        className="w-full rounded-lg"
-      />
-      <div className="slider-container absolute  md:top-7  xl:top-7 lg:top-6 md:w-[28.5rem] lg:w-[22rem]  xl:w-[28.5rem] md:left-[4.9rem] xl:left-[4.9rem] lg:left-[3.9rem]">
+    <div className="relative -mt-1 sm:bg-slate-800 sm:-mt-1 md:-mt-2 lg:-mt-5 ">
+      <div className="slider-container absolute top-0 left-0 w-full h-full">
         <Slider {...settings}>
-          <div className="">
+          <div>
             <img
               src="../../public/images/slider-CE.png"
               alt=""
-              className="sm:w-[28.5rem] md:w-[28.5rem] lg:w-[22rem] xl:w-[28.5rem] md:h-[17.8125rem] xl:h-[17.8125rem] lg:h-[14rem] "
+              className="w-full h-auto object-cover border-[5px] "
             />
           </div>
-          <div className="">
+          <div>
             <img
               src="../../public/images/slider-VE.png"
               alt=""
-              className="md:w-[28.5rem] lg:w-[22rem] xl:w-[28.5rem] md:h-[17.8125rem] xl:h-[17.8125rem] lg:h-[14rem] "
+              className="w-full h-auto object-cover border-[5px] "
             />
           </div>
-          <div className="">
+          <div>
+            {/* h-[61px] sm:h-[109px] md:h-[110px] lg:h-[277px] */}
             <img
-              src="../../public/images/slider-pf.png"
+              src="../../public/images/slider_Profile.png"
               alt=""
-              className="md:w-[28.5rem] lg:w-[22rem] xl:w-[28.5rem] md:h-[17.8125rem] xl:h-[17.8125rem] lg:h-[14rem] "
+              className="w-full h-auto object-cover border-[5px] "
             />
           </div>
         </Slider>
