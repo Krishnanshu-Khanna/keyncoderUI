@@ -69,7 +69,7 @@ const Testimonials = ({ theme, type, course }) => {
       >
         {type === "student" ? "Hear From Our Students" : "Expert Reviews"}
       </h1>
-      <p className="mt-0 text-[#8A8A8A]">
+      <p className="mt-2 text-[#8A8A8A]">
         {type !== "student"
           ? "Hear what Industry people say about our Course"
           : ""}

@@ -5,7 +5,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Batches from "./pages/Batches.jsx";
 import MyBatches from "./pages/MyBatches.jsx";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PostLogin from "./pages/PostLogin.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
@@ -21,8 +21,14 @@ import Forgotpassword from "./pages/Forgotpassword.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import ResetPass from "./pages/Resetpass.jsx";
+import Spinner from "./components/Spinner.jsx";
+
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const savedUser = JSON.parse(localStorage.getItem("savedUser"));
+  const user_resetId = savedUser.resetPasswordToken;
+  console.log(user_resetId);
   const notify = (message, type = "default") => {
     toast(message, {
       type,
@@ -87,6 +93,7 @@ const App = () => {
                 <PreLogin theme={theme} handleThemeSwitch={handleThemeSwitch} />
               }
             />
+
             <Route
               path="/batches"
               element={
@@ -150,6 +157,7 @@ const App = () => {
                 <ContactUs
                   handleThemeSwitch={handleThemeSwitch}
                   theme={theme}
+                  notify={notify}
                 />
               }
             />
@@ -206,9 +214,14 @@ const App = () => {
               element={<Forgotpassword notify={notify} />}
             />
             <Route path="*" element={<ErrorPage />} />
+            <Route
+              path="/reset-password/:token"
+              element={<ResetPass notify={notify} />}
+            />
           </Routes>
         </BrowserRouter>
       </div>
+
       <ToastContainer />
     </>
   );

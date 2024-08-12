@@ -1,45 +1,72 @@
 // src/components/Login.js
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
+
 // import { login } from "../api/Login"; no need to Import the login function
 
-function Login({ theme }) {
-  const API_URL = "http://localhost:3001"; // Replace with your actual API URL
+function Login({ theme, notify }) {
+  const imgRef = useRef();
+  const passRef = useRef();
+  const backendUrl = "https://keyncoder-temp-forked-jp27.vercel.app"; // Change to http
+  const [loading, setLoading] = useState(false);
+
+  // const backendUrl = process.env.BACKEND_URL; Replace with your actual API URL
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
+  const showpass = () => {
+    if (passRef.current.type === "password") {
+      passRef.current.type = "text";
+      imgRef.current.src = "../images/Eyecross.png";
+    } else {
+      passRef.current.type = "password";
+      imgRef.current.src = "../images/Eyeopen.png";
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    // try {
-    //   const response = await fetch(`${API_URL}/auth/login`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ email, password }),
-    //   });
+    setLoading(true);
+    try {
+      const response = await fetch(`${backendUrl}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    //   const json = await response.json();
-    //   // for debugging purpose
-    //   console.log(json);
+      const json = await response.json();
+      // for debugging purpose
+      console.log(json);
 
-    //   if (json.success) {
-    //     //if success then Save the token and redirect
-    //     //double check auth-token
-    //     localStorage.setItem("token", json.token);
-    //   }
-    //   else {
-    //console.error("Login failed:", json.message);
-    // we can also show an alert here
-    // }
-    // } catch (error) {
-    //   console.error("An error occurred:", error);
-    //   throw error;
-    // }
-    navigate("/user-postlogin");
+      if (response.ok) {
+        //if success then Save the token and redirect
+        //double check auth-token
+        localStorage.setItem("token", json.token);
+        localStorage.setItem("resetPasswordToken", json.resetPasswordToken);
+        console.log(json.user);
+        localStorage.setItem("savedUser", JSON.stringify(json.user));
+
+        // Retrieve savedUser from localStorage and parse it back to an object
+
+        navigate("/user-postlogin");
+
+        notify("welcome back!");
+      } else {
+        console.error("Login failed:", json.message);
+        notify("Incorrect username or password");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -88,7 +115,7 @@ function Login({ theme }) {
                 className="w-full px-3 py-2 border border-zinc-300 rounded-md dark:bg-[#292626]"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label
                 htmlFor="password"
                 className="block text-zinc-700 dark:text-[#A4A4A4]"
@@ -96,14 +123,26 @@ function Login({ theme }) {
                 Password
               </label>
               <input
+                ref={passRef}
                 type="password"
                 id="password"
                 name="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-zinc-300 rounded-md dark:bg-[#292626]"
+                className="relative w-full px-3 py-2 border border-zinc-300 rounded-md dark:bg-[#292626]"
               />
+              <span
+                className="absolute inset-y-0 mt-6 flex items-center right-1 cursor-pointer"
+                onClick={showpass}
+              >
+                <img
+                  ref={imgRef}
+                  width={24}
+                  src="../images/Eyeopen.png"
+                  alt="Eye"
+                />
+              </span>
             </div>
             <div className="mb-6 flex items-center">
               <input
@@ -126,8 +165,9 @@ function Login({ theme }) {
                   ? "dark:bg-orange-600 dark:hover:bg-gray-600"
                   : ""
               }`}
+              disabled={loading}
             >
-              Login now
+              {loading ? <Spinner /> : "Login now"}
             </button>
             <div className="flex justify-between">
               <div className="mt-4 text-center text-zinc-600 dark:text-[#A4A4A4]">
