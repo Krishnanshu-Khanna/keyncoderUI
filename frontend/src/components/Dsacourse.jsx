@@ -168,6 +168,7 @@ export default function Landing({ theme }) {
             }`}
           >
             <img
+              loading="lazy"
               className="h-auto w-auto"
               src="../images/teacher_video.png"
               alt="Teacher"
@@ -277,6 +278,7 @@ export default function Landing({ theme }) {
               <div className="mb-4 md:mb-0  ">
                 {/* Aligning image the text adjusts accordingly */}
                 <img
+                  loading="lazy"
                   src="./images/mentor_ayush.jpeg"
                   className=" w-full sm:w-44 lg:w-[1024px]  md:w-96 h-auto rounded-xl border-slate-800 mx-auto md:mx-0"
                   alt="Marry"
