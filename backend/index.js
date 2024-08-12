@@ -25,12 +25,10 @@ app.use("/code", codeRoutes);
 app.use("/admin", adminRoutes);
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.DATABASE_URL)
   .then(() => {
-    app.listen(process.env.PORT, () =>
-      console.log(
-        `Server running at https://keyncoder-temp-forked-jp27.vercel.app:${process.env.PORT}`
-      )
+    app.listen(process.env.PORT, "0.0.0.0", () =>
+      console.log(`Server running at http://localhost:${process.env.PORT}`)
     );
   })
   .catch((error) => console.log(`${error} did not connect`));
