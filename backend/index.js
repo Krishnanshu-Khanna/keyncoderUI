@@ -27,7 +27,7 @@ app.use("/admin", adminRoutes);
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
-    app.listen(process.env.PORT, "0.0.0.0", () =>
+    app.listen(process.env.PORT, () =>
       console.log(`Server running at http://localhost:${process.env.PORT}`)
     );
   })
