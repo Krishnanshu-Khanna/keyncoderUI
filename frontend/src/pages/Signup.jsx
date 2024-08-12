@@ -14,7 +14,7 @@ function Signup({ theme, notify }) {
   const [loading, setLoading] = useState(false);
 
   // const backendUrl = process.env.BACKEND_URL; Replace with your actual API URL
-  const backendUrl = "http://localhost:5000";
+  const backendUrl = "https://keyncoder-temp-forked-jp27.vercel.app";
   const navigate = useNavigate();
 
   const checkPasswordStrength = (password) => {

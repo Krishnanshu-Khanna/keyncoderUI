@@ -36,13 +36,16 @@ function ContactUs({ theme, handleThemeSwitch, notify }) {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/admin/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
+      const response = await fetch(
+        "https://keyncoder-temp-forked-jp27.vercel.app/admin/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, message }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();

@@ -5,7 +5,7 @@ import Spinner from "../components/Spinner";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const API_URL = "http://localhost:5000"; // Replace with your actual API URL
+  const API_URL = "https://keyncoder-temp-forked-jp27.vercel.app"; // Replace with your actual API URL
   const [loading, setLoading] = useState(false);
   const handleForgotPassword = async (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ const ForgotPassword = () => {
                 {loading && (
                   <Spinner className="absolute inset-0 m-auto w-6 h-6" />
                 )}
-                {!loading && "Login now"}
+                {!loading && "Send"}
               </button>
               {message !== "Email not registered" ? (
                 <p className="mt-4 text-center text-green-400 text-xl font-bold">

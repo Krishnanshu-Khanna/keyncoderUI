@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 // import zxcvbn from "zxcvbn";
 import Spinner from "../components/Spinner";
+import { useParams } from "react-router-dom";
 const ResetPass = ({ notify }) => {
-  const backendUrl = "http://localhost:5000";
+  const backendUrl = "https://keyncoder-temp-forked-jp27.vercel.app";
   const [password, setPassword] = useState("");
   const imgRef = useRef();
   const passRef = useRef();
@@ -10,8 +11,10 @@ const ResetPass = ({ notify }) => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  const savedUser = JSON.parse(localStorage.getItem("savedUser"));
-  const user_resetId = savedUser.resetPasswordToken;
+  // const savedUser = JSON.parse(localStorage.getItem("savedUser"));
+  // const user_resetId = savedUser.resetPasswordToken;
+
+  const { token } = useParams();
 
   // const checkPasswordStrength = (password) => {
   //   const hasLetters = /[a-zA-Z]/.test(password);
@@ -37,12 +40,12 @@ const ResetPass = ({ notify }) => {
 
     console.log("Saved User:", savedUser);
 
-    console.log("Reset Token:", user_resetId);
+    console.log("Reset Token:", token);
 
     try {
       console.log("p1");
       const response = await fetch(
-        `${backendUrl}/auth/reset-password/${user_resetId}`,
+        `${backendUrl}/auth/reset-password/${token}`,
         {
           method: "POST",
           headers: {

@@ -26,9 +26,9 @@ import Spinner from "./components/Spinner.jsx";
 
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  // const savedUser = JSON.parse(localStorage.getItem("savedUser"));
-  // const user_resetId = savedUser.resetPasswordToken;
-  // console.log(user_resetId);
+  const savedUser = JSON.parse(localStorage.getItem("savedUser"));
+  const user_resetId = savedUser.resetPasswordToken;
+  console.log(user_resetId);
   const notify = (message, type = "default") => {
     toast(message, {
       type,
@@ -214,10 +214,10 @@ const App = () => {
               element={<Forgotpassword notify={notify} />}
             />
             <Route path="*" element={<ErrorPage />} />
-            {/* <Route
-              path={`/reset-password/:${user_resetId}`}
+            <Route
+              path="/reset-password/:token"
               element={<ResetPass notify={notify} />}
-            /> */}
+            />
           </Routes>
         </BrowserRouter>
       </div>
